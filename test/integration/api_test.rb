@@ -49,6 +49,10 @@ class ApiTest < ActionDispatch::IntegrationTest
     post '/resources', params: '{invalid: "form"}', headers: default_headers.merge('Content-Type': Mime[:url_encoded_form].to_s)
     assert_response 422
     # result: bad param is safely neutered
+
+    post "/resources", params: 'invalid-multipart', headers: default_headers.merge('Content-Type': Mime[:multipart_form].to_s)
+    assert_response 422
+    # bad param is safely neutered
   end
 
   test "Invalid route -> 404" do
