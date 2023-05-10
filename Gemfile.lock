@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    rails-hush (1.0.2)
+    rails-hush (1.1.0)
       rails (>= 6, < 7.1)
 
 GEM
@@ -82,7 +82,7 @@ GEM
       activesupport (>= 5.0)
     i18n (1.13.0)
       concurrent-ruby (~> 1.0)
-    loofah (2.20.0)
+    loofah (2.21.1)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
     mail (2.8.1)

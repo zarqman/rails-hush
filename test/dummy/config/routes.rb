@@ -3,5 +3,6 @@ Rails.application.routes.draw do
 
   get 'good' => 'home#good'
   resources :resources
+  resources :csrf_resources
 
 end

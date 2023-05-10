@@ -110,6 +110,13 @@ class ApiTest < ActionDispatch::IntegrationTest
     assert_api_message %r{Required parameter missing}
   end
 
+  test "Invalid CSRF -> 422" do
+    # Two => ActionController::InvalidAuthenticityToken
+    post '/csrf_resources', params: {authenticity_token: 'invalid'}
+    assert_response 422
+    assert_api_message %r{Invalid CSRF token}
+  end
+
 
 
   def default_headers
