@@ -42,9 +42,9 @@ RailsHush does support a couple of configuration options:
 To disable automatic loading of middleware:
 
     # Phase one (early) middleware
-    config.rails_hush.use_one  = true
+    config.rails_hush.use_one  = false
     # Phase two (late) middleware
-    config.rails_hush.use_two  = true
+    config.rails_hush.use_two  = false
 
 Then add the middleware on your own:
 
@@ -78,7 +78,7 @@ Rails' default "test" environment settings are quite different than "production"
 
 ## Contributing
 
-Contributions welcome. Please use standard Github Pull Requests.
+Contributions welcome. Please use standard GitHub Pull Requests.
 
 
 ## License
