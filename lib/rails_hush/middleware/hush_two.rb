@@ -1,5 +1,6 @@
 module RailsHush
   class HushTwo
+    include ShowExceptions
     include SimpleRenderer
 
     def initialize(app, renderer=nil)
@@ -9,7 +10,7 @@ module RailsHush
 
     def call(env)
       request = ActionDispatch::Request.new env
-      if request.show_exceptions? && !request.get_header("action_dispatch.show_detailed_exceptions")
+      if show_exceptions?(request) && !request.get_header("action_dispatch.show_detailed_exceptions")
         begin
           _, headers, body = response = @app.call(env)
           if headers['X-Cascade'] == 'pass'
