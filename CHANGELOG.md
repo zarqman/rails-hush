@@ -1,3 +1,7 @@
+#### 1.1.2
+
+- Improve Rack 3 compatibility
+
 #### 1.1.1
 
 - Handle changes to show_exceptions in Rails 7.1
