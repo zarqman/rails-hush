@@ -73,7 +73,8 @@ RailsHush also has a replaceable renderer, in case you don't like the default js
 Rails' default "test" environment settings are quite different than "production". While the default settings are quite appropriate, with them it is near impossible to test the actual behavior of RailsHush, because it will effectively be disabled in "test". On the whole, it's recommended to just rely on RailsHush's own test suite. However, if you really want to test its behavior inside your app, change the following in `environments/test.rb`:
 
     config.consider_all_requests_local     = false
-    config.action_dispatch.show_exceptions = true
+    config.action_dispatch.show_exceptions = true        # rails <= 7.0
+    config.action_dispatch.show_exceptions = :rescuable  # rails >= 7.1
 
 
 ## Contributing
