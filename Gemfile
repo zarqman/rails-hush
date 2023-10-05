@@ -11,6 +11,8 @@ gemspec
 # your gem to rubygems.org.
 # gem 'rails', '~> 7.0.0'
 gem 'rails', '~> 7.1.0'
+  gem 'rack', '~> 3'
+  # gem 'rack', '~> 2'
 
 # To use a debugger
 # gem 'byebug', group: [:development, :test]

@@ -13,7 +13,7 @@ module RailsHush
       if show_exceptions?(request) && !request.get_header("action_dispatch.show_detailed_exceptions")
         begin
           _, headers, body = response = @app.call(env)
-          if headers['X-Cascade'] == 'pass'
+          if headers['X-Cascade'] == 'pass' || headers['x-cascade'] == 'pass'
             body.close if body.respond_to?(:close)
             raise ActionController::RoutingError, "No route matches [#{env['REQUEST_METHOD']}] #{env['PATH_INFO'].inspect}"
           end
