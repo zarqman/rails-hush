@@ -14,10 +14,10 @@ Gem::Specification.new do |spec|
   spec.description = "Hushes worthless Rails exceptions & logs, such as those caused by bots and crawlers."
   spec.license     = "MIT"
 
-  spec.files = Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.md"]
+  spec.files = Dir["{app,config,db,lib}/**/*", "LICENSE.txt", "Rakefile", "README.md"]
 
   spec.add_dependency "rails", ">= 6", "< 7.2"
 
-  spec.add_development_dependency "sqlite3"
+  spec.add_development_dependency "sqlite3", "~> 1.4"
   spec.add_development_dependency "minitest-reporters"
 end
