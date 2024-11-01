@@ -16,8 +16,10 @@ Gem::Specification.new do |spec|
 
   spec.files = Dir["{app,config,db,lib}/**/*", "LICENSE.txt", "Rakefile", "README.md"]
 
-  spec.add_dependency "rails", ">= 6", "< 7.2"
+  spec.required_ruby_version = '>= 2.7'
 
-  spec.add_development_dependency "sqlite3", "~> 1.4"
-  spec.add_development_dependency "minitest-reporters"
+  spec.add_dependency 'rails', '>= 7', '< 8.1'
+
+  spec.add_development_dependency 'sqlite3'
+  spec.add_development_dependency 'minitest-reporters'
 end

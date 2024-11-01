@@ -1,3 +1,8 @@
+#### 2.0.0
+
+- Support Rails 7.2, 8.0
+- Drop Rails 6.0, 6.1
+
 #### 1.1.2
 
 - Improve Rack 3 compatibility
