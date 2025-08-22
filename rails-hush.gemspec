@@ -14,6 +14,11 @@ Gem::Specification.new do |spec|
   spec.description = "Hushes worthless Rails exceptions & logs, such as those caused by bots and crawlers."
   spec.license     = "MIT"
 
+  spec.metadata = {
+    'source_code_uri' => 'https://github.com/zarqman/rails-hush',
+    'changelog_uri' => 'https://github.com/zarqman/rails-hush/blob/master/CHANGELOG.md'
+  }
+
   spec.files = Dir["{app,config,db,lib}/**/*", "LICENSE.txt", "Rakefile", "README.md"]
 
   spec.required_ruby_version = '>= 2.7'

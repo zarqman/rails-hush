@@ -11,8 +11,8 @@ gemspec
 # your gem to rubygems.org.
 # gem 'rails', '~> 7.0.0'
 # gem 'rails', '~> 7.1.0'
-gem 'rails', '~> 7.2.0'
-# gem 'rails', '~> 8.0.0.a'
+# gem 'rails', '~> 7.2.0'
+gem 'rails', '~> 8.0.0'
 gem 'rack', '~> 3'
 # gem 'rack', '~> 2'
 # gem 'sqlite3', '~> 1.4' # rails 7.0, 7.1, 7.2

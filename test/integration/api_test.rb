@@ -33,24 +33,24 @@ class ApiTest < ActionDispatch::IntegrationTest
 
   test "Invalid % encoding (payload) -> 400" do
     # Two => ActionController::BadRequest / Invalid request parameters: invalid %-encoding ({invalid: "%form"})
-    post '/resources', params: '{invalid: "%form"}'
+    post '/resources', params: +'{invalid: "%form"}'
     assert_response 400
     assert_api_message %r{Invalid string or encoding}
   end
 
   test "Invalid json -> 400" do
     # Two => ActionDispatch::Http::Parameters::ParseError / 767: unexpected token at '{invalid: "json"}'
-    post '/resources', params: '{invalid: "json"}', headers: default_headers.merge('Content-Type': Mime[:json].to_s)
+    post '/resources', params: +'{invalid: "json"}', headers: default_headers.merge('Content-Type': Mime[:json].to_s)
     assert_response 400
     assert_api_message %r{Unable to parse}
 
     # Two => ActionController::ParameterMissing
     #   effectively becomes same as 422 test below
-    post '/resources', params: '{invalid: "form"}', headers: default_headers.merge('Content-Type': Mime[:url_encoded_form].to_s)
+    post '/resources', params: +'{invalid: "form"}', headers: default_headers.merge('Content-Type': Mime[:url_encoded_form].to_s)
     assert_response 422
     # result: bad param is safely neutered
 
-    post "/resources", params: 'invalid-multipart', headers: default_headers.merge('Content-Type': Mime[:multipart_form].to_s)
+    post "/resources", params: +'invalid-multipart', headers: default_headers.merge('Content-Type': Mime[:multipart_form].to_s)
     assert_response 422
     # bad param is safely neutered
   end
@@ -67,7 +67,7 @@ class ApiTest < ActionDispatch::IntegrationTest
 
   test "Invalid method -> 405" do
     # One => ActionController::UnknownHttpMethod / FAKE_METHOD, accepted HTTP methods are ...
-    process :fake_method, '/resources', params: '{}'
+    process :fake_method, '/resources', params: +'{}'
     assert_response 405
     assert_api_message %r{Unrecognized HTTP method}
   end

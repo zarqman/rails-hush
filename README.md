@@ -79,7 +79,7 @@ Rails' default "test" environment settings are quite different than "production"
 
 ## Contributing
 
-Contributions welcome. Please use standard GitHub Pull Requests.
+Contributions welcomed. Please use standard GitHub Pull Requests.
 
 
 ## License
