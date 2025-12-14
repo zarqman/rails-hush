@@ -38,7 +38,24 @@ class ApiTest < ActionDispatch::IntegrationTest
     assert_api_message %r{Invalid string or encoding}
   end
 
-  test "Invalid json -> 400" do
+  test "Invalid utf16le encoding (payload) -> 400" do
+    # One => Encoding::CompatibilityError
+    mp_utf16le = [
+      '--AaB03x',
+      'content-disposition: form-data; name="part1"',
+      'content-type: text/plain; charset=utf-16le',
+      '',
+      'Tést=Tést'.encode('utf-16le').b,
+      '',
+      '--AaB03x--',
+      nil
+    ].join("\r\n")
+    post '/resources', params: mp_utf16le, headers: default_headers.merge('Content-Type': 'multipart/form-data; boundary=AaB03x')
+    assert_response 400
+    assert_api_message %r{Invalid string or encoding}
+  end
+
+  test "Invalid payload -> 400,422" do
     # Two => ActionDispatch::Http::Parameters::ParseError / 767: unexpected token at '{invalid: "json"}'
     post '/resources', params: +'{invalid: "json"}', headers: default_headers.merge('Content-Type': Mime[:json].to_s)
     assert_response 400
@@ -50,9 +67,26 @@ class ApiTest < ActionDispatch::IntegrationTest
     assert_response 422
     # result: bad param is safely neutered
 
-    post "/resources", params: +'invalid-multipart', headers: default_headers.merge('Content-Type': Mime[:multipart_form].to_s)
+    post '/resources', params: +'invalid-multipart', headers: default_headers.merge('Content-Type': Mime[:multipart_form].to_s)
     assert_response 422
     # bad param is safely neutered
+  end
+
+  test "Invalid multipart payload -> 400" do
+    # Two => Rack::Multipart::EmptyContentError
+    get '/resources', headers: { 'content-type': "multipart/form-data; boundary=#{'abcde'*14}", 'rack.input': StringIO.new('') }
+    assert_response 400
+    assert_api_message %r{Unable to parse}
+
+    # Two => Rack::Multipart::BoundaryTooLongError
+    get '/resources', headers: { 'content-type': "multipart/form-data; boundary=#{'abcde'*15}", 'rack.input': StringIO.new('') }
+    assert_response 400
+    assert_api_message %r{Unable to parse}
+
+    # Two => ActionController::BadRequest / Invalid request parameters: bad content body
+    get '/resources', headers: { 'content-type': "multipart/form-data; boundary=#{'abcde'*14}", 'content-length': 22, 'rack.input': StringIO.new('') }
+    assert_response 400
+    assert_api_message %r{Unable to parse}
   end
 
   test "Invalid route -> 404" do

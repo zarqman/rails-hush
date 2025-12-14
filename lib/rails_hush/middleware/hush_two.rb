@@ -23,10 +23,14 @@ module RailsHush
           if x.message =~ /(Invalid encoding for parameter|invalid %-encoding)/
             log_request 400, request
             render 400, request, 'Invalid string or encoding'
+          elsif x.message =~ /Rack::Multipart::EmptyContentError|bad content body/
+            log_request 400, request
+            render 400, request, 'Unable to parse request body'
           else
             raise x
           end
-        rescue ActionDispatch::Http::Parameters::ParseError
+        rescue ActionDispatch::Http::Parameters::ParseError,
+               Rack::Multipart::BoundaryTooLongError
           log_request 400, request
           render 400, request, 'Unable to parse request body'
         rescue ActionController::RoutingError => x

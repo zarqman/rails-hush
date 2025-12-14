@@ -16,7 +16,9 @@ module RailsHush
     def render(status, request, error=nil)
       begin
         content_type = request.formats.first
-      rescue Mime::Type::InvalidMimeType
+      rescue Mime::Type::InvalidMimeType,
+             Encoding::CompatibilityError,
+             Rack::Multipart::BoundaryTooLongError
         content_type = Mime[:text]
       end
       error ||= Rack::Utils::HTTP_STATUS_CODES.fetch(status, Rack::Utils::HTTP_STATUS_CODES[500])

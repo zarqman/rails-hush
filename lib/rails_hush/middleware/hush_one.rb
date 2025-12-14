@@ -15,6 +15,8 @@ module RailsHush
           @app.call(env)
         rescue ActionController::UnknownHttpMethod
           render 405, request, 'Unrecognized HTTP method'
+        rescue Encoding::CompatibilityError
+          render 400, request, 'Invalid string or encoding'
         end
       else
         @app.call(env)
