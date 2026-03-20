@@ -1,5 +1,14 @@
+#### 2.2.0
+
+- Support Rails 8.2
+
+#### 2.1.0
+
+- Handle several exceptions related to multipart requests
+
 #### 2.0.1
 
+- Support Ruby 3.4
 - Support Rails 8.1
 
 #### 2.0.0

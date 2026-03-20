@@ -46,7 +46,7 @@ module RailsHush
           render 406, request, 'Invalid media type'
         rescue ActionController::ParameterMissing => x
           render 422, request, "Required parameter missing or empty: #{x.param}"
-        rescue ActionController::InvalidAuthenticityToken
+        rescue (Rails.version > '8.2' ? ActionController::InvalidCrossOriginRequest : ActionController::InvalidAuthenticityToken)
           render 422, request, 'Invalid CSRF token'
         end
       else
