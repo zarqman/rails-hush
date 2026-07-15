@@ -19,7 +19,7 @@ gem 'rack', '~> 3'
 # gem 'sqlite3', '~> 1.4' # rails 7.0, 7.1, 7.2
 # gem 'sqlite3', '~> 2.1' # rails 7.2, 8.0
 
-gem 'minitest', '~> 5'
+gem 'minitest', '~> 6'
 
 # To use a debugger
 # gem 'byebug', group: [:development, :test]
