@@ -1,3 +1,7 @@
+#### 2.3.0
+
+- Hush ActionController::TooManyRequests exceptions
+
 #### 2.2.0
 
 - Support Rails 8.2

@@ -151,6 +151,13 @@ class ApiTest < ActionDispatch::IntegrationTest
     assert_api_message %r{Invalid CSRF token}
   end
 
+  test "rails native rate limited -> 429" do
+    get '/ratelimited'
+    get '/ratelimited'
+    assert_response 429
+    assert_api_message %r{Too Many Requests}
+  end
+
 
 
   def default_headers

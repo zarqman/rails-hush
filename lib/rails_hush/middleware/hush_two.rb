@@ -48,6 +48,8 @@ module RailsHush
           render 422, request, "Required parameter missing or empty: #{x.param}"
         rescue (Rails.version > '8.2' ? ActionController::InvalidCrossOriginRequest : ActionController::InvalidAuthenticityToken)
           render 422, request, 'Invalid CSRF token'
+        rescue ActionController::TooManyRequests
+          render 429, request, 'Too Many Requests'
         end
       else
         @app.call(env)
